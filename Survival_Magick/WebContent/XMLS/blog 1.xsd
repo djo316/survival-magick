@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+	<!-- Élément simple,ce qui compose un articles -->
+	<xs:element name="titre" type="xs:string" />
+	<xs:element name="article">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:whiteSpace value="preserve" />
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="lienImage" type="xs:string" />
+
+	<!-- Attribut, comment on classe les articles -->
+	<xs:attribute name="auteur" type="xs:string" />
+	<xs:attribute name="dateCreation" type="xs:date" />
+	<xs:attribute name="derniereModification" type="xs:date" />
+	<xs:attribute name="categorie" type="xs:string" />
+
+	<!-- Élément complexes, la construction des articles -->
+	<xs:element name="billet">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="titre" />
+				<xs:element ref="article" />
+				<xs:element ref="lienImage" minOccurs="0" />
+			</xs:sequence>
+			<xs:attribute ref="auteur" use="required" />
+			<xs:attribute ref="dateCreation" use="required" />
+			<xs:attribute ref="derniereModification" use="optional" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

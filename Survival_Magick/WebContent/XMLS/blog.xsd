@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+	<!-- Élément simple,ce qui compose un articles -->
+	<xs:element name="titre" type="xs:string" />
+	<xs:element name="auteur" type="xs:string" />
+	<xs:element name="dateCreation" type="xs:date" />
+	<xs:element name="derniereModification" type="xs:date" />
+	<xs:element name="lienImage" type="xs:string" />
+	<xs:element name="article">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:whiteSpace value="preserve" />
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
+	<!-- Attribut, comment on classe les articles -->
+	<xs:attribute name="categorie" type="xs:string" />
+	<xs:attribute name="billetID" type="xs:integer" />
+
+	<!-- Élément complexes, la construction des articles -->
+	<xs:element name="billet">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="titre" />
+				<xs:element ref="auteur" />
+				<xs:element ref="dateCreation" />
+				<xs:element ref="derniereModification" minOccurs="0" />
+				<xs:element ref="article" />
+				<xs:element ref="lienImage" minOccurs="0" />
+			</xs:sequence>
+			<xs:attribute ref="categorie" use="required" />
+			<xs:attribute ref="billetID" use="required" />
+		</xs:complexType>
+	</xs:element>
+
+
+
+	<xs:element name="blog">
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref="billet" maxOccurs="unbounded">
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
